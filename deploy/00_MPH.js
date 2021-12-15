@@ -10,6 +10,7 @@ module.exports = async ({getNamedAccounts, deployments}) => {
   console.log('------')
   console.log('network name: ', hre.network.name)
   console.log('Deployer: ' + account0)
+  console.log(process.env.PRIVATE_KEY)
   console.log('------')
 
   const baseUri = process.env.BASE_URI
