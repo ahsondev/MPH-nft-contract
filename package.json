@@ -18,7 +18,9 @@
   "scripts": {
     "clean": "npx hardhat clean && rimraf ./src/contracts.json",
     "test": "npx hardhat test",
-    "compile": "npx hardhat compile"
+    "compile": "npx hardhat compile",
+    "deploy:rinkeby": "npx hardhat --network rinkeby deploy",
+    "deploy:mainnet": "npx hardhat --network mainnet deploy"
   },
   "author": "",
   "license": "ISC",

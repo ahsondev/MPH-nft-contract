@@ -5,6 +5,7 @@ require('hardhat-deploy')
 require('dotenv-flow').config()
 
 module.exports = {
+  defaultNetwork: 'rinkeby',
   solidity: {
     compilers: [
       {
@@ -30,7 +31,11 @@ module.exports = {
     rinkeby: {
       url: process.env.RINKEBY_URL,
       accounts: [process.env.PRIVATE_KEY]
-    }
+    },
+    mainnet: {
+      url: process.env.MAINNET_URL,
+      accounts: [process.env.PRIVATE_KEY]
+    },
   },
   namedAccounts: {
     account0: 0
