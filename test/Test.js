@@ -15,7 +15,9 @@ function getInfo(transaction) {
     "value(eth)": ethers.utils.formatUnits(transaction.value, 18),
     "gasPrice(eth)": ethers.utils.formatUnits(transaction.gasPrice, 18),
     "gasLimit": ethers.utils.formatUnits(transaction.gasLimit, 0),
-    "fee(eth)": ethers.utils.formatUnits(transaction.gasPrice.mul(transaction.gasLimit), 18),
+    gasUsed: ethers.utils.formatUnits(transaction.gasUsed, 0),
+    "limit fee(eth)": ethers.utils.formatUnits(transaction.gasPrice.mul(transaction.gasLimit), 18),
+    "real fee(eth)": ethers.utils.formatUnits(transaction.gasPrice.mul(transaction.gasUsed), 18),
   }
 
   /*
@@ -58,10 +60,14 @@ beforeEach(async function() {
 
 describe('Token contract', function() {
   it('MPHNft token test', async function() {
-    const ret = await token.mint(1, {
+    const tx = await token.mint(1, {
       value: ethers.utils.parseEther('0.08'),
     })
-    console.log("base info: ", ret)
-    console.log("calculated: ",getInfo(ret))
+
+    const receipt = await tx.wait();
+    const gasUsed = receipt.gasUsed;
+    tx.gasUsed = gasUsed;
+    // console.log("base info: ", tx)
+    console.log("calculated: ", getInfo(tx))
   })
 })
